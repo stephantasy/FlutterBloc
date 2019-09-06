@@ -4,7 +4,9 @@ import 'package:bloc_pattern/model/iweather_api.dart';
 import './bloc.dart';
 
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
-  IWeatherApi weatherApi;
+  final IWeatherApi _weatherApi;
+
+  WeatherBloc(this._weatherApi);
 
   @override
   WeatherState get initialState => WeatherInitial();
@@ -15,7 +17,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   ) async* {
     if (event is GetWeather) {
       yield WeatherLoading();
-      final weather = await weatherApi.fetchWeatherFromApi(event.cityName);
+      final weather = await _weatherApi.fetchWeatherFromApi(event.cityName);
       yield WeatherLoaded(weather);
     }
   }
