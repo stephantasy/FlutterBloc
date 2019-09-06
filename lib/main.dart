@@ -44,6 +44,8 @@ class _WeatherPageState extends State<WeatherPage> {
             alignment: Alignment.center,
 
             // BLOC STUFF
+            // The builder function has to be a "pure function".
+            // That is, it only returns a Widget and doesn't do anything else.
             child: BlocBuilder(
               bloc: weatherBloc,
               builder: (BuildContext context, WeatherState state) {
@@ -130,7 +132,7 @@ class _CityInputFieldState extends State<CityInputField> {
   void submitCityName(String cityName) {
     // Get the Bloc using the BlocProvider
     final weatherBloc = BlocProvider.of<WeatherBloc>(context);
-    
+
     // Initiate getting the weather
     weatherBloc.dispatch(GetWeather(cityName));
   }
